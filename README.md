@@ -20,7 +20,7 @@ When a user is on a single photo and copies the browser url, sharing it with ano
 
 ### Uploader
 
-Display a form, with a single file input field to which uploads files to s3 (you will need your own ammazon account)
+Display a form, with a single file input field to which uploads files to s3 (you will need your own amazon account)
 
 Accpet mp4 video files up to 50MB. Display an error to the user if the file is over 50MB. Display a progress bar during upload.
 
