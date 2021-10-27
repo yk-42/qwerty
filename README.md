@@ -12,7 +12,7 @@ Use:
 
 Code a photo album which reads the items from https://jsonplaceholder.typicode.com/albums/1/photos
 
-Render the photos in a 12x12 grid for desktop or 2x2 on Mobile devices (you choose the breakpoint or rely on your framework)
+Render the photos in a 12 column grid for desktop or 2 column on Mobile devices (you choose the breakpoint or rely on your framework)
 
 When a photo is clicked, switch to fullscreen, and allow the user to swipe between images (or click a corresponding arrow)
 
