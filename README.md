@@ -34,3 +34,9 @@ Given an application which has many API calls which require authentication and t
 2. Make a new branch for your work
 3. Submit a pull request with your submission
 4. Email us a link to the pull request
+
+## Tips
+
+- Automated tests are fundamental to successful software projects (we expect to see some)
+- Using libraries, frameworks, and copied examples is fine, but you will be expected to explain your choices. So if in doubt, it may for example, be better to use your own implementation than using a library you do not fully understand.
+- Linting and other checks are up to you
