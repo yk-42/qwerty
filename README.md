@@ -8,7 +8,7 @@ Use:
 
 1. ReactJS
 2. Your favourite tools for state management, UI framework and HTTP requests
-3. JSON PLaceholder (https://jsonplaceholder.typicode.com/guide/) as a data source
+3. JSON Placeholder (https://jsonplaceholder.typicode.com/guide/) as a data source
 
 Implement a photo album which reads the items from https://jsonplaceholder.typicode.com/albums/1/photos
 
@@ -24,7 +24,7 @@ Display a form, with a single file input field which uploads files to s3 (you wi
 
 Accept mp4 video files up to 50MB. Display an error to the user if the file is over 50MB. Display a progress bar during upload.
 
-### Authentication
+### Authentication UX
 
 Given an application which has many API calls which require authentication and therefore may at any point return Unauthorized (401), how would you structure your UI code so that the user will always be redirected to the login page if this occurs? Please sketch an example - feel free to build upon the photo album case from above.
 
