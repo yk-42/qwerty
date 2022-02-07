@@ -1,28 +1,29 @@
-import './App.css'
-
 import React from 'react'
 
-import logo from './logo.svg'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom'
 
-function App () {
+import CssBaseline from '@mui/material/CssBaseline'
+
+import { appRoutes } from './routes'
+import { RenderRouteUtil } from './routes/RouteRenderUtil';
+import { AuthProvider } from './appState/Auth/AuthProvider';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
+    <React.Fragment>
+      <CssBaseline />
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {appRoutes.map(RenderRouteUtil)}
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </React.Fragment>
+  );
 }
-
-export default App

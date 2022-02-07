@@ -6,7 +6,7 @@ export const appRoutes = [
   {
     route: '/auth',
     name: 'Auth',
-    children: [
+    nestedRoutes: [
       {
         name: 'Sign-in',
         route: '/sign-in'
@@ -20,7 +20,7 @@ export const appRoutes = [
   {
     route: '/gallery',
     name: 'Gallery',
-    children: [
+    nestedRoutes: [
       {
         name: 'Home',
         route: '/'
@@ -34,7 +34,7 @@ export const appRoutes = [
   {
     route: '/my-space',
     name: 'My space',
-    children: [
+    nestedRoutes: [
       {
         name: 'Home',
         route: '/',
