@@ -12,22 +12,24 @@ export function AuthProvider({ children }) {
   })
 
   const signIn = (userCredentials, errorCB, callback) => {
-    return axios.post().then(
-      () => {
+    return axios
+      .post()
+      .then(() => {
         setUser(userCredentials)
         callback()
-      }
-    ).catch(() => {
-      errorCB()
-    })
+      })
+      .catch(() => {
+        errorCB()
+      })
   }
 
   const signOut = (callback) => {
-    return axios.post('').then(
-      () => {
+    return axios
+      .post('')
+      .then(() => {
         callback()
-      }
-    ).catch()
+      })
+      .catch()
   }
 
   const value = { user, signIn, signOut }

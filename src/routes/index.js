@@ -1,7 +1,11 @@
+import React from 'react'
+import { ErrorPage } from '../pages/security/ErrorPage'
+
 export const appRoutes = [
   {
     route: '/',
-    name: 'Landing'
+    name: 'Landing',
+    exact: true
   },
   {
     route: '/auth',
@@ -41,5 +45,10 @@ export const appRoutes = [
         private: true
       }
     ]
+  },
+  {
+    path: '*',
+    name: 'Error',
+    element: <ErrorPage />
   }
 ]

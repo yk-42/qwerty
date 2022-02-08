@@ -8,7 +8,7 @@ import {
 
 import { useAuth } from '../../hooks/useAuth'
 
-export function RequireAuth({ children }) {
+export function RequireAuth ({ children }) {
   const auth = useAuth()
   const location = useLocation()
 
