@@ -14,7 +14,9 @@
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+    "no-unused-vars": 1,
+    "react/prop-types": 1
   },
   "settings": {
     "react": {
