@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { Route } from 'react-router-dom'
+
 import { RequireAuth } from '../components/security/RequireAuth'
 
 export const RenderRouteUtil = ({

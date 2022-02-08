@@ -1,9 +1,13 @@
 import React from 'react'
+
+import { DefaultLayout } from '../layout/DefaultLayout'
+import { LandingLayout } from '../layout/LandingLayout'
 import { SignIn } from '../pages/auth/SignIn'
 import { SignUp } from '../pages/auth/SignUp'
 import { PhotoList } from '../pages/gallery/PhotoList'
 import { PhotoPreview } from '../pages/gallery/PhotoPreview'
 import { Landing } from '../pages/home/Landing'
+import { MySpace } from '../pages/my-space/MySpace'
 import { ErrorPage } from '../pages/security/ErrorPage'
 
 export const appRoutes = [
@@ -11,7 +15,11 @@ export const appRoutes = [
     path: '/',
     name: 'Landing',
     exact: true,
-    element: <Landing />
+    element: (
+      <LandingLayout>
+        <Landing />
+      </LandingLayout>
+    )
   },
   {
     path: '/auth',
@@ -20,12 +28,20 @@ export const appRoutes = [
       {
         name: 'Sign-in',
         path: 'sign-in',
-        element: <SignIn />
+        element: (
+          <LandingLayout>
+            <SignIn />
+          </LandingLayout>
+        )
       },
       {
         name: 'Sign-up',
         path: 'sign-up',
-        element: <SignUp />
+        element: (
+          <LandingLayout>
+            <SignUp />
+          </LandingLayout>
+        )
       }
     ]
   },
@@ -36,22 +52,35 @@ export const appRoutes = [
       {
         name: 'Photo List',
         path: '',
-        element: <PhotoList />
+        element: (
+          <DefaultLayout>
+            <PhotoList />
+          </DefaultLayout>
+        )
       },
       {
         name: 'Photo Preview',
         path: 'pic/:id',
-        component: <PhotoPreview />
+        element: (
+          <DefaultLayout>
+            <PhotoPreview />
+          </DefaultLayout>
+        )
       }
     ]
   },
   {
-    path: '/my-space',
-    name: 'My space',
+    path: '/home',
+    name: 'Home',
     nestedRoutes: [
       {
-        name: 'Home',
-        path: '',
+        name: 'My Space',
+        path: 'my-space',
+        element: (
+          <DefaultLayout>
+            <MySpace />
+          </DefaultLayout>
+        ),
         private: true
       }
     ]
