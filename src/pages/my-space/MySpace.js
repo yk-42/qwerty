@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export function MySpace() {
-  return <div>Default MySpace</div>;
+  return <div>Default MySpace</div>
 }

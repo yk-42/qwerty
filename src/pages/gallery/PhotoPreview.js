@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export function PhotoPreview() {
-  return <div>Photo Preview</div>;
+  return <div>Photo Preview</div>
 }
