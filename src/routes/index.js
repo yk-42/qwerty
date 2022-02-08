@@ -1,47 +1,57 @@
 import React from 'react'
+import { SignIn } from '../pages/auth/SignIn'
+import { SignUp } from '../pages/auth/SignUp'
+import { PhotoList } from '../pages/gallery/PhotoList'
+import { PhotoPreview } from '../pages/gallery/PhotoPreview'
+import { Landing } from '../pages/home/Landing'
 import { ErrorPage } from '../pages/security/ErrorPage'
 
 export const appRoutes = [
   {
-    route: '/',
+    path: '/',
     name: 'Landing',
-    exact: true
+    exact: true,
+    element: <Landing />
   },
   {
-    route: '/auth',
+    path: '/auth',
     name: 'Auth',
     nestedRoutes: [
       {
         name: 'Sign-in',
-        route: '/sign-in'
+        path: 'sign-in',
+        element: <SignIn />
       },
       {
         name: 'Sign-up',
-        route: '/sign-up'
+        path: 'sign-up',
+        element: <SignUp />
       }
     ]
   },
   {
-    route: '/gallery',
+    path: '/gallery',
     name: 'Gallery',
     nestedRoutes: [
       {
-        name: 'Home',
-        route: '/'
+        name: 'Photo List',
+        path: '',
+        element: <PhotoList />
       },
       {
-        name: 'Picture Preview',
-        route: '/pic/:id'
+        name: 'Photo Preview',
+        path: 'pic/:id',
+        component: <PhotoPreview />
       }
     ]
   },
   {
-    route: '/my-space',
+    path: '/my-space',
     name: 'My space',
     nestedRoutes: [
       {
         name: 'Home',
-        route: '/',
+        path: '',
         private: true
       }
     ]

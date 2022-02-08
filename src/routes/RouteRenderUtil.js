@@ -5,8 +5,6 @@ import { RequireAuth } from '../components/security/RequireAuth'
 
 export const RenderRouteUtil = ({
   name,
-  route,
-  element,
   nestedRoutes,
   private: isPrivate,
   ...other
@@ -15,11 +13,16 @@ export const RenderRouteUtil = ({
   if (nestedRoutes) {
     NestedRoutes = <>{nestedRoutes.map(RenderRouteUtil)}</>
   }
-  const pureProps = { route, element, children: NestedRoutes, ...other }
+  const pureProps = { children: NestedRoutes, ...other }
+  if (pureProps.element) {
+    pureProps.element = (
+      <React.Suspense fallback={<>...</>}>{pureProps.element}</React.Suspense>
+    )
+  }
+  if (isPrivate) {
+    pureProps.element = <RequireAuth>{pureProps.element}</RequireAuth>
+  }
   const RouteComponent = <Route key={name} {...pureProps} />
 
-  if (isPrivate) {
-    return <RequireAuth>{RouteComponent}</RequireAuth>
-  }
   return RouteComponent
 }
