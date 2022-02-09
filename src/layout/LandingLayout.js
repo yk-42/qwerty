@@ -8,9 +8,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { UserMenu } from '../components/auth/UserMenu'
+import { useAuth } from '../hooks/useAuth'
 import { routePaths } from '../routes/route-tools'
 
 export function LandingLayout({ children }) {
+  const { isAuth } = useAuth()
+  const _isAuth = isAuth()
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="absolute" elevation={0}>
@@ -30,23 +34,29 @@ export function LandingLayout({ children }) {
             flexGrow={1}
             spacing={1}
           >
-            <Button
-              LinkComponent={Link}
-              to={routePaths.SIGN_UP}
-              variant="contained"
-              color="secondary"
-            >
-              Sign-up
-            </Button>
-            <Button
-              LinkComponent={Link}
-              to={routePaths.SIGN_IN}
-              variant="contained"
-              color="secondary"
-              mx={3}
-            >
-              Sign-in
-            </Button>
+            {!_isAuth ? (
+              <UserMenu />
+            ) : (
+              <>
+                <Button
+                  LinkComponent={Link}
+                  to={routePaths.SIGN_UP}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Sign-up
+                </Button>
+                <Button
+                  LinkComponent={Link}
+                  to={routePaths.SIGN_IN}
+                  variant="contained"
+                  color="secondary"
+                  mx={3}
+                >
+                  Sign-in
+                </Button>
+              </>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>

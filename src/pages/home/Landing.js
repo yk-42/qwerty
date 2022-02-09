@@ -23,12 +23,12 @@ export function Landing() {
         justifyContent={'center'}
         spacing={4}
       >
-        <Grid item xs={8}>
+        <Grid item xs={8} textAlign="center">
           <Typography my={4} variant="h1" fontWeight={'900'} color="primary">
             Welcome to your Awesome online gallery
           </Typography>
           <Typography variant="h4" fontWeight={'900'}>
-            📷Where you can post &amp; share all your media 📸
+            Where you can post &amp; share all your 📷media 📸
           </Typography>
         </Grid>
         <Grid

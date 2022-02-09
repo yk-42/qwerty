@@ -17,7 +17,7 @@ export const routePaths = {
   SIGN_UP: '/auth/sign-up',
   GALLERY: '/gallery',
   PHOTO_LIST: '/gallery',
-  PHOTO_PREVIEW: '/gallery/pic/:id',
+  PHOTO_PREVIEW: (id) => `/gallery/pic/${id}`,
   MY_SPACE: '/home/my-space',
   HOME: '/home',
   ERROR: '*'

@@ -1,35 +1,56 @@
+import { Container, Stack } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
-import { purple } from '@mui/material/colors'
 import PropTypes from 'prop-types'
 
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { routePaths } from '../routes/route-tools'
 
 export function DefaultLayout({ children }) {
-  console.log(children)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
-          <Box component="div" sx={{ flexGrow: 1 }} />
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Login</Button>
+          <Button
+            LinkComponent={Link}
+            to={routePaths.LANDING}
+            variant="text"
+            sx={{ color: 'white' }}
+          >
+            Resourceful Humans Technical Test
+          </Button>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            flexGrow={1}
+            spacing={1}
+          >
+            <Button
+              LinkComponent={Link}
+              to={routePaths.SIGN_UP}
+              variant="contained"
+              color="secondary"
+            >
+              Sign-up
+            </Button>
+            <Button
+              LinkComponent={Link}
+              to={routePaths.SIGN_IN}
+              variant="contained"
+              color="secondary"
+              mx={3}
+            >
+              Sign-in
+            </Button>
+          </Stack>
         </Toolbar>
       </AppBar>
-      <>
-        <Box
-          sx={{
-            padding: 10,
-            bgcolor: purple[50]
-          }}
-          height="75vh"
-        >
-          Hi
-          {children}
-        </Box>
-      </>
+      <Container maxWidth={false}>{children}</Container>
     </Box>
   )
 }
