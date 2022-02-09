@@ -1,6 +1,5 @@
 import { ContentCopy } from '@mui/icons-material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
 import { Box } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -11,19 +10,25 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useLikedList } from '../../hooks/useLikedList'
 import { useSnackBar } from '../../hooks/useSnackbar'
 import { routePaths } from '../../routes/route-tools'
 
 export function PhotoCard({ albumId, id, title, url, thumbnailUrl }) {
   const [visibleOverlay, setVisibleOverlay] = React.useState(false)
+  const { likedList, triggerLike } = useLikedList()
+
   const { triggerSnackbar } = useSnackBar()
+
+  const isPhotoLiked = React.useMemo(() => likedList.includes(id), [likedList])
+
   const handleExpandClick = () => {
     setVisibleOverlay(!visibleOverlay)
   }
-  const navigte = useNavigate()
+  const navigate = useNavigate()
 
   const openPhotoPreview = () => {
-    navigte(routePaths.PHOTO_PREVIEW(id))
+    navigate(routePaths.PHOTO_PREVIEW(id))
   }
 
   const copyLink = () => {
@@ -40,7 +45,7 @@ export function PhotoCard({ albumId, id, title, url, thumbnailUrl }) {
       sx={{ cursor: 'pointer' }}
     >
       <Box sx={{ position: 'relative' }}>
-        {visibleOverlay && (
+        {(isPhotoLiked || visibleOverlay) && (
           <CardHeader
             sx={{
               position: 'absolute',
@@ -48,11 +53,16 @@ export function PhotoCard({ albumId, id, title, url, thumbnailUrl }) {
             }}
             action={
               <>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon color="inherit" />
-                </IconButton>
-                <IconButton aria-label="share" onClick={copyLink}>
-                  <ContentCopy />
+                {visibleOverlay && (
+                  <IconButton aria-label="share" onClick={copyLink}>
+                    <ContentCopy />
+                  </IconButton>
+                )}
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => triggerLike(id)}
+                >
+                  <FavoriteIcon color={isPhotoLiked ? 'primary' : 'inherit'} />
                 </IconButton>
               </>
             }

@@ -1,4 +1,5 @@
-import { Snackbar } from '@mui/material'
+import { CloseOutlined } from '@mui/icons-material'
+import { IconButton, Snackbar } from '@mui/material'
 import PropTypes from 'prop-types'
 
 import React from 'react'
@@ -23,7 +24,7 @@ export function SnackbarProvider({ children }) {
   }
 
   const closeSnackbar = () => {
-    setSnackbarState({ ...DEFAULT_SNACKBAR_STATE })
+    setSnackbarState((sb) => ({ ...sb, open: false }))
   }
 
   const value = {
@@ -38,7 +39,18 @@ export function SnackbarProvider({ children }) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         open={snackbarState.open}
         message={snackbarState.message}
+        autoHideDuration={3000}
         onClose={closeSnackbar}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={closeSnackbar}
+          >
+            <CloseOutlined fontSize="small" />
+          </IconButton>
+        }
       />
     </SnackbarContext.Provider>
   )

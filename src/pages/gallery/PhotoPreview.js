@@ -6,7 +6,6 @@ import {
 import { IconButton, Skeleton, Stack } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Box } from '@mui/system'
-import axios from 'axios'
 
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'

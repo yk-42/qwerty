@@ -1,7 +1,6 @@
 import { HideImage } from '@mui/icons-material'
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
-import axios from 'axios'
 
 import React from 'react'
 
