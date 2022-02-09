@@ -1,13 +1,18 @@
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { IconButton } from '@mui/material'
+import { Divider, IconButton } from '@mui/material'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useAuth } from '../../hooks/useAuth'
+import { routePaths } from '../../routes/route-tools'
 
 export function UserMenu() {
   const [menuAnchor, setMenuAnchor] = React.useState(null)
-
+  const _navigate = useNavigate()
+  const { signOut } = useAuth()
   const handleMenu = (event) => {
     setMenuAnchor(event.currentTarget)
   }
@@ -15,6 +20,13 @@ export function UserMenu() {
   const handleClose = () => {
     setMenuAnchor(null)
   }
+  const logout = () => {
+    handleClose()
+    signOut().then(() => {
+      _navigate('/')
+    })
+  }
+
   return (
     <>
       <IconButton
@@ -42,8 +54,25 @@ export function UserMenu() {
         open={Boolean(menuAnchor)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem>
+          <Link
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            to={routePaths.MY_SPACE}
+          >
+            My Space
+          </Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            to={routePaths.PHOTO_LIST}
+          >
+            My account
+          </Link>
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={logout}>Log-out</MenuItem>
       </Menu>
     </>
   )

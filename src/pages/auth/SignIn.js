@@ -1,11 +1,5 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import {
-  Container,
-  FormHelperText,
-  FormLabel,
-  Stack,
-  useFormControl
-} from '@mui/material'
+import { Container, FormHelperText, Stack } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -29,14 +23,13 @@ export function SignIn() {
     event.preventDefault()
     setError(false)
     const data = new FormData(event.currentTarget)
-    // eslint-disable-next-line no-console
     const userCredentials = {
       email: data.get('email'),
       password: data.get('password')
     }
     const errorCB = () => setError(true)
     const callback = () => {
-      navigate(routePaths.MY_SPACE)
+      navigate(routePaths.GALLERY)
     }
     signIn(userCredentials, errorCB, callback)
   }

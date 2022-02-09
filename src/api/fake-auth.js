@@ -1,4 +1,18 @@
 /* eslint-disable camelcase */
+const init_backend = () => {
+  const db = localStorage.getItem('dummy-backend')
+  const fakeData = {
+    _b_firstName: 'admin',
+    _b_lastName: 'admin',
+    _b_email: 'admin',
+    _b_password: 'admin'
+  }
+  if (!db) {
+    localStorage.setItem('dummy-backend', JSON.stringify(fakeData))
+  }
+}
+
+init_backend()
 const DUMMY_BACKEND_USER_DATA = JSON.parse(
   localStorage.getItem('dummy-backend')
 )
@@ -7,9 +21,11 @@ export const signInPromised = ({ email, password }) => {
   console.log({ email, password })
   return new Promise((resolve, reject) => {
     const { _b_firstName, _b_lastName, _b_email, _b_password } =
-      DUMMY_BACKEND_USER_DATA || {}
-    console.log({ DUMMY_BACKEND_USER_DATA })
-    if ((!_b_email && password === '0000') || _b_password === password) {
+      DUMMY_BACKEND_USER_DATA
+    if (
+      (!_b_email && password === '0000') ||
+      (_b_email === email && _b_password === password)
+    ) {
       return setTimeout(() => {
         return resolve({
           userEmail: email,

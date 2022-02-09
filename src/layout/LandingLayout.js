@@ -13,8 +13,8 @@ import { useAuth } from '../hooks/useAuth'
 import { routePaths } from '../routes/route-tools'
 
 export function LandingLayout({ children }) {
-  const { isAuth } = useAuth()
-  const _isAuth = isAuth()
+  const { isAuth, user } = useAuth()
+  const isAuthorized = React.useMemo(() => isAuth(), [user])
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={0}>
@@ -34,7 +34,7 @@ export function LandingLayout({ children }) {
             flexGrow={1}
             spacing={1}
           >
-            {!_isAuth ? (
+            {isAuthorized ? (
               <UserMenu />
             ) : (
               <>

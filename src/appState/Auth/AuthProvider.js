@@ -8,7 +8,6 @@ import {
   signUpPromised
 } from '../../api/fake-auth'
 import { persistIntoLocalStorage } from '../../helpers/persistence'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { AuthContext } from './AuthContext'
 
 const DEFAULT_USER_OBJECT = {
@@ -21,12 +20,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = React.useState({
     ...DEFAULT_USER_OBJECT
   })
-  const {
-    localStorageValue: localStorageUserCredentials
-    // updateLocalStorageValue: updateLocalStorageUserCredentials
-  } = useLocalStorage('user-credentials')
 
   React.useEffect(() => {
+    const localStorageUserCredentials = localStorage.getItem('user-credentials')
     let parsedUserCredentials = null
     try {
       parsedUserCredentials = JSON.parse(localStorageUserCredentials)
@@ -36,7 +32,7 @@ export function AuthProvider({ children }) {
     if (parsedUserCredentials) {
       setUser(parsedUserCredentials)
     }
-  }, [localStorageUserCredentials])
+  }, [])
 
   const signUp = (userCredentials, errorCB, callback) => {
     return signUpPromised(userCredentials)

@@ -8,14 +8,15 @@ import { useAuth } from '../../hooks/useAuth'
 export function RequireAuth({ children }) {
   const { isAuth, user } = useAuth()
   const location = useLocation()
-  if (isAuth()) {
+  const isAuthorized = React.useMemo(() => isAuth(), [user])
+  console.log({ isAuthorized, user })
+  if (!isAuthorized) {
     return (
       <Navigate
         to="/401"
         state={{
           from: location,
-          errorCode: '401',
-          errorMessage: 'Authorization Required.'
+          errorCode: '401'
         }}
         replace
       />

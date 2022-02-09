@@ -1,26 +1,21 @@
-import { Button, Divider, Grid, Link, Stack, Typography } from '@mui/material'
+import { Button, Divider, Grid, Stack, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/system'
 import PropTypes from 'prop-types'
 
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-// import './index.css'
+import { routeNames, routePaths } from '../../routes/route-tools'
 
-// <div className="error-container">
-//   <div>
-//     <h1 className="error-code">{errorCode || state?.errorCode || '404'}</h1>
-//     <div className="error-text-container">
-//       <h2 className="error-text">
-//         {errorMessage ||
-//           state?.errorMessage ||
-//           'This page could not be found'}
-//       </h2>
-//     </div>
-//   </div>
-//   <div>Go back to africa</div>
-// </div>
+const RouterLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.primary.main
+}))
+
 export function ErrorPage({ errorCode, errorMessage }) {
   const { state } = useLocation()
+  const theme = useTheme()
+
   console.log(location)
   return (
     <Grid
@@ -42,9 +37,31 @@ export function ErrorPage({ errorCode, errorMessage }) {
           <Typography>{errorCode || state?.errorCode || '404'}</Typography>
           <Divider orientation="vertical" flexItem />
           <Typography>
-            {errorMessage ||
+            {!state?.errorMessage && state?.errorCode === '401' ? (
+              <>
+                Authorization Required! Head to{' '}
+                <RouterLink
+                  style={{ textDecoration: 'none' }}
+                  to={routePaths.SIGN_IN}
+                >
+                  {routeNames.SIGN_IN}
+                </RouterLink>
+                {' or '}
+                <RouterLink
+                  style={{
+                    textDecoration: 'none',
+                    color: theme.palette?.main?.primary
+                  }}
+                  to={routePaths.SIGN_IN}
+                >
+                  {routeNames.SIGN_IN}
+                </RouterLink>
+              </>
+            ) : (
+              errorMessage ||
               state?.errorMessage ||
-              'This page could not be found'}
+              'This page could not be found'
+            )}
           </Typography>
         </Stack>
         <Grid
@@ -55,7 +72,7 @@ export function ErrorPage({ errorCode, errorMessage }) {
           justifyContent={'center'}
         >
           <Stack spacing={2} direction="row">
-            <Button link href="/" variant="text">
+            <Button LinkComponent={Link} to="/" variant="text">
               Return Home
             </Button>
           </Stack>

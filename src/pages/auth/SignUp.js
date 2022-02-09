@@ -1,30 +1,38 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { Container, Stack } from '@mui/material'
+import { Container, FormHelperText, Stack } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../hooks/useAuth'
 import { routePaths } from '../../routes/route-tools'
 
 export function SignUp() {
+  const [error, setError] = React.useState(false)
+  const { signUp } = useAuth()
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault()
+    setError(false)
     const data = new FormData(event.currentTarget)
-    // eslint-disable-next-line no-console
-    console.log({
+    const userCredentials = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password')
-    })
+    }
+    const errorCB = () => setError(true)
+    const callback = () => {
+      navigate(routePaths.GALLERY)
+    }
+    signUp(userCredentials, errorCB, callback)
   }
-
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -87,10 +95,11 @@ export function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
+              {error && (
+                <FormHelperText sx={{ pb: 3 }} error>
+                  {'Invalid/Missing new Account data!'}
+                </FormHelperText>
+              )}
             </Grid>
           </Grid>
 
