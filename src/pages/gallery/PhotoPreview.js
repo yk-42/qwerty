@@ -9,29 +9,53 @@ import { Box } from '@mui/system'
 import axios from 'axios'
 
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { useGallery } from '../../hooks/useGallery'
+import { routePaths } from '../../routes/route-tools'
 
 export function PhotoPreview() {
   const [photoData, setPhotoData] = React.useState({})
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const params = useParams()
+  const navigte = useNavigate()
+  const navigateToPhotoPreview = (id) => {
+    navigte(routePaths.PHOTO_PREVIEW(id))
+  }
+  const { loadCurrent, getNext, getPrevious, galleryStore } = useGallery()
+  const errorCB = () => setError(true)
+  const callBack = (data) => setPhotoData(data)
+
+  const previousDisableCalc = React.useMemo(
+    () => !getPrevious() || loading,
+    [galleryStore.currentIndex]
+  )
+  const nextDisableCalc = React.useMemo(
+    () => !getNext() || loading,
+    [galleryStore.currentIndex]
+  )
+
+  const gotoPreviousImage = () => {
+    const _prevImageData = getPrevious()
+    if (_prevImageData?.id) {
+      navigateToPhotoPreview(_prevImageData?.id)
+    }
+  }
+  const gotoNextImage = () => {
+    const _nextImageData = getNext()
+    if (_nextImageData?.id) {
+      navigateToPhotoPreview(_nextImageData?.id)
+    }
+  }
+
   React.useEffect(() => {
     setLoading(true)
-    axios
-      .get('https://jsonplaceholder.typicode.com/photos/' + params?.id)
-      .then((data) => {
-        if (data?.data) {
-          setPhotoData(data?.data)
-        } else {
-          setError(true)
-        }
+    if (params?.id) {
+      loadCurrent({ photoId: params?.id }, errorCB, callBack).finally(() =>
         setLoading(false)
-      })
-      .catch(() => {
-        setError(true)
-      })
-
+      )
+    }
     return () => {}
   }, [params])
 
@@ -53,7 +77,8 @@ export function PhotoPreview() {
         direction="row"
       >
         <IconButton
-          disabled={loading}
+          disabled={previousDisableCalc}
+          onClick={gotoPreviousImage}
           sx={{ width: '5rem', height: '5rem', fontSize: '4rem' }}
           size="large"
           aria-label="fingerprint"
@@ -70,7 +95,8 @@ export function PhotoPreview() {
           <img src={photoData?.url} alt={'awesome-photo'} />
         )}
         <IconButton
-          disabled={loading}
+          disabled={nextDisableCalc}
+          onClick={gotoNextImage}
           sx={{ width: '5rem', height: '5rem', fontSize: '4rem' }}
           size="large"
           variant="contained"

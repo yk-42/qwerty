@@ -6,27 +6,18 @@ import axios from 'axios'
 import React from 'react'
 
 import { PhotoCard } from '../../components/gallery/PhotoCard'
+import { useGallery } from '../../hooks/useGallery'
 
 export function PhotoList() {
   const [albumPhotos, setAlbumPhotos] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
-
+  const { loadAllData } = useGallery()
   React.useEffect(() => {
+    const errorCB = () => setError(true)
+    const callBack = (data) => setAlbumPhotos(data || [])
     setLoading(true)
-    axios
-      .get('https://jsonplaceholder.typicode.com/albums/1/photos')
-      .then((data) => {
-        if (data?.data) {
-          setAlbumPhotos(data?.data)
-        } else {
-          setError(true)
-        }
-        setLoading(false)
-      })
-      .catch(() => {
-        setError(true)
-      })
+    loadAllData(errorCB, callBack).finally(() => setLoading(false))
 
     return () => {}
   }, [])

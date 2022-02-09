@@ -61,19 +61,9 @@ export function GalleryProvider({ children }) {
     }
     return null
   }
-  const moveNext = () => {
-    if (getNext()) {
-      setGalleryStore((gs) => ({ ...gs, currentIndex: gs.currentIndex + 1 }))
-    }
-  }
-
-  const movePrevious = () => {
-    if (getPrevious()) {
-      setGalleryStore((gs) => ({ ...gs, currentIndex: gs.currentIndex - 1 }))
-    }
-  }
 
   const loadCurrent = ({ photoId }, errorCB, callBack) => {
+    console.log('hi')
     const _current = getCurrent()
     if (_current) {
       callBack(_current)
@@ -88,10 +78,11 @@ export function GalleryProvider({ children }) {
         }
         return data?.data
       })
-      .then((data) => {
+      .then(() => {
         const _allDataCallBack = (_all) => {
-          ;[].findIndex()
-          const currentItemIndex = _all.findIndex((e) => e.id === data?.id)
+          const currentItemIndex = _all.findIndex(
+            (e) => e.id === Number(photoId)
+          )
           setGalleryStore((gs) => ({ ...gs, currentIndex: currentItemIndex }))
         }
         loadAllData(() => {}, _allDataCallBack)
@@ -104,8 +95,6 @@ export function GalleryProvider({ children }) {
     getNext,
     getPrevious,
     getCurrent,
-    moveNext,
-    movePrevious,
     loadCurrent
   }
 
