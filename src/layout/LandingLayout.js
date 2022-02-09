@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material'
+import { Container, Stack } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -17,7 +17,7 @@ export function LandingLayout({ children }) {
   const _isAuth = isAuth()
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="absolute" elevation={0}>
+      <AppBar position="static" elevation={0}>
         <Toolbar>
           <Button
             LinkComponent={Link}
@@ -60,7 +60,7 @@ export function LandingLayout({ children }) {
           </Stack>
         </Toolbar>
       </AppBar>
-      {children}
+      <Container maxWidth={false}>{children}</Container>
     </Box>
   )
 }

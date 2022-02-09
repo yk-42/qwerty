@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { DefaultLayout } from '../layout/DefaultLayout'
 import { GalleryLayout } from '../layout/GalleryLayout'
 import { LandingLayout } from '../layout/LandingLayout'
 import { SignIn } from '../pages/auth/SignIn'
@@ -78,9 +77,9 @@ export const appRoutes = [
         name: 'My Space',
         path: 'my-space',
         element: (
-          <DefaultLayout>
+          <LandingLayout>
             <MySpace />
-          </DefaultLayout>
+          </LandingLayout>
         ),
         private: true
       }

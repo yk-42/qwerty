@@ -3,16 +3,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { GalleryProvider } from '../appState/gallery/GalleryProvider'
+import { LikedListContextProvider } from '../appState/likedList/LikedListContextProvider'
 import { SnackbarProvider } from '../appState/snackbar/SnackbarProvider'
-import { DefaultLayout } from './DefaultLayout'
+import { LandingLayout } from './LandingLayout'
 
 export function GalleryLayout({ children }) {
   return (
-    <DefaultLayout>
+    <LandingLayout>
       <GalleryProvider>
-        <SnackbarProvider>{children}</SnackbarProvider>
+        <SnackbarProvider>
+          <LikedListContextProvider>{children}</LikedListContextProvider>
+        </SnackbarProvider>
       </GalleryProvider>
-    </DefaultLayout>
+    </LandingLayout>
   )
 }
 GalleryLayout.propTypes = { children: PropTypes.element }
