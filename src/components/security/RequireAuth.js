@@ -6,10 +6,9 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
 export function RequireAuth({ children }) {
-  const { isAuth } = useAuth()
+  const { isAuth, user } = useAuth()
   const location = useLocation()
-  console.log({ isAuth, location, children })
-  if (!isAuth()) {
+  if (isAuth()) {
     return (
       <Navigate
         to="/401"

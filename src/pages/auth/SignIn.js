@@ -1,5 +1,11 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { Container, Stack } from '@mui/material'
+import {
+  Container,
+  FormHelperText,
+  FormLabel,
+  Stack,
+  useFormControl
+} from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -10,21 +16,30 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../hooks/useAuth'
 import { routePaths } from '../../routes/route-tools'
 
 export function SignIn() {
+  const [error, setError] = React.useState(false)
+  const { signIn } = useAuth()
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault()
+    setError(false)
     const data = new FormData(event.currentTarget)
     // eslint-disable-next-line no-console
-    console.log({
+    const userCredentials = {
       email: data.get('email'),
       password: data.get('password')
-    })
+    }
+    const errorCB = () => setError(true)
+    const callback = () => {
+      navigate(routePaths.MY_SPACE)
+    }
+    signIn(userCredentials, errorCB, callback)
   }
-
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -47,6 +62,7 @@ export function SignIn() {
             margin="normal"
             required
             fullWidth
+            error={error}
             id="email"
             label="Email Address"
             name="email"
@@ -56,6 +72,7 @@ export function SignIn() {
           <TextField
             margin="normal"
             required
+            error={error}
             fullWidth
             name="password"
             label="Password"
@@ -63,6 +80,9 @@ export function SignIn() {
             id="password"
             autoComplete="current-password"
           />
+          {error && (
+            <FormHelperText error>{'Invalid credentials'}</FormHelperText>
+          )}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import landingPicture from '../../assets/img/landing/landing.png'
+import { routePaths } from '../../routes/route-tools'
 
 export function Landing() {
   return (
@@ -39,10 +40,18 @@ export function Landing() {
           justifyContent={'center'}
         >
           <Stack spacing={2} direction="row">
-            <Button LinkComponent={Link} to="/gallery" variant="contained">
+            <Button
+              LinkComponent={Link}
+              to={routePaths.PHOTO_LIST}
+              variant="contained"
+            >
               Go to Gallery
             </Button>
-            <Button LinkComponent={Link} to="/my-space/" variant="outlined">
+            <Button
+              LinkComponent={Link}
+              to={routePaths.MY_SPACE}
+              variant="outlined"
+            >
               Upload your Video
             </Button>
           </Stack>
