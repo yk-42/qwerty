@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { DefaultLayout } from '../layout/DefaultLayout'
+import { GalleryLayout } from '../layout/GalleryLayout'
 import { LandingLayout } from '../layout/LandingLayout'
 import { SignIn } from '../pages/auth/SignIn'
 import { SignUp } from '../pages/auth/SignUp'
@@ -53,18 +54,18 @@ export const appRoutes = [
         name: 'Photo List',
         path: '',
         element: (
-          <DefaultLayout>
+          <GalleryLayout>
             <PhotoList />
-          </DefaultLayout>
+          </GalleryLayout>
         )
       },
       {
         name: 'Photo Preview',
         path: 'pic/:id',
         element: (
-          <DefaultLayout>
+          <GalleryLayout>
             <PhotoPreview />
-          </DefaultLayout>
+          </GalleryLayout>
         )
       }
     ]
