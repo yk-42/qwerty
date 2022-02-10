@@ -63,7 +63,6 @@ export function GalleryProvider({ children }) {
   }
 
   const loadCurrent = ({ photoId }, errorCB, callBack) => {
-    console.log('hi')
     const _current = getCurrent()
     if (_current) {
       callBack(_current)

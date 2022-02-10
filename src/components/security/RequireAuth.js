@@ -9,7 +9,6 @@ export function RequireAuth({ children }) {
   const { isAuth, user } = useAuth()
   const location = useLocation()
   const isAuthorized = React.useMemo(() => isAuth(), [user])
-  console.log({ isAuthorized, user })
   if (!isAuthorized) {
     return (
       <Navigate

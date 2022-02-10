@@ -46,23 +46,20 @@ export function AuthProvider({ children }) {
       })
   }
   const signIn = (userCredentials, errorCB, callback) => {
-    console.log({ userCredentials, errorCB, callback })
     return signInPromised(userCredentials)
       .then((_uc) => {
-        console.log(_uc)
         persistIntoLocalStorage('user-credentials', _uc)
         setUser(_uc)
         callback(_uc)
       })
       .catch(() => {
-        console.log('aaa')
         errorCB()
       })
   }
 
   const signOut = (callback) => {
     return signOutPromised().then(() => {
-      persistIntoLocalStorage('user-credentials', {})
+      localStorage.removeItem('user-credentials')
       setUser({
         ...DEFAULT_USER_OBJECT
       })
@@ -71,7 +68,13 @@ export function AuthProvider({ children }) {
   }
 
   const isAuth = () =>
-    user.userEmail && user.userFirstName && user.userLastName && user.token
+    Boolean(
+      (user.userEmail &&
+        user.userFirstName &&
+        user.userLastName &&
+        user.token) ||
+        localStorage.getItem('user-credentials')
+    )
   const value = { user, signIn, signOut, signUp, isAuth }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

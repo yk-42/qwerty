@@ -18,7 +18,6 @@ const DUMMY_BACKEND_USER_DATA = JSON.parse(
 )
 
 export const signInPromised = ({ email, password }) => {
-  console.log({ email, password })
   return new Promise((resolve, reject) => {
     const { _b_firstName, _b_lastName, _b_email, _b_password } =
       DUMMY_BACKEND_USER_DATA

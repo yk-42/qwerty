@@ -14,6 +14,7 @@ import {
   Skeleton,
   Typography
 } from '@mui/material'
+import { grey } from '@mui/material/colors'
 
 import React from 'react'
 
@@ -229,7 +230,7 @@ export function FileUploader() {
               height={80}
             ></Skeleton>
           )}
-          {filesInfos &&
+          {filesInfos && filesInfos.length ? (
             filesInfos.map((file, index) => (
               <ListItemButton
                 key={index}
@@ -247,7 +248,15 @@ export function FileUploader() {
                   ).toLocaleString()}
                 />
               </ListItemButton>
-            ))}
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText
+                sx={{ textAlign: 'center', color: grey[400] }}
+                primary={"You don't have any uploads yet."}
+              />
+            </ListItem>
+          )}
         </List>
       </Grid>
       {/* <ul className="list-group">

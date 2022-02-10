@@ -16,7 +16,6 @@ export function ErrorPage({ errorCode, errorMessage }) {
   const { state } = useLocation()
   const theme = useTheme()
 
-  console.log(location)
   return (
     <Grid
       container
