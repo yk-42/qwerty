@@ -77,11 +77,11 @@ export const appRoutes = [
         name: 'My Space',
         path: 'my-space',
         element: (
-          <LandingLayout>
+          <GalleryLayout>
             <MySpace />
-          </LandingLayout>
-        )
-        // private: true
+          </GalleryLayout>
+        ),
+        private: true
       }
     ]
   },

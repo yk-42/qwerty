@@ -11,7 +11,9 @@ export function Landing() {
     <Grid
       container
       spacing={0}
-      height={'100vh'}
+      sx={{
+        maxHeight: '90%'
+      }}
       alignContent="center"
       justifyContent={'center'}
     >
@@ -22,13 +24,20 @@ export function Landing() {
         md={6}
         alignContent="center"
         justifyContent={'center'}
+        textAlign="center"
         spacing={4}
       >
         <Grid item xs={8} textAlign="center">
-          <Typography my={4} variant="h1" fontWeight={'900'} color="primary">
+          <Typography
+            my={4}
+            variant="h1"
+            fontWeight={'900'}
+            color="primary"
+            textAlign="center"
+          >
             Welcome to your Awesome online gallery
           </Typography>
-          <Typography variant="h4" fontWeight={'900'}>
+          <Typography variant="h4" fontWeight={'900'} textAlign="center">
             Where you can post &amp; share all your 📷media 📸
           </Typography>
         </Grid>
@@ -57,8 +66,14 @@ export function Landing() {
           </Stack>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={5} flexWrap="wrap">
-        <img src={landingPicture} alt={'landing picture'} width={'100%'} />
+      <Grid item xs={12} md={5} p={5} flexWrap="wrap">
+        <img
+          src={landingPicture}
+          alt={'landing picture'}
+          style={{
+            width: '100%'
+          }}
+        />
       </Grid>
     </Grid>
   )

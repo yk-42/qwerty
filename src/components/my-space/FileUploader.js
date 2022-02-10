@@ -18,6 +18,7 @@ import {
 import React from 'react'
 
 import { config } from '../../config'
+import { useSnackBar } from '../../hooks/useSnackbar'
 
 // new AWS.CognitoIdentityCredentials({
 //   IdentityPoolId: 'eu-central-1:52ad2e33-dd7b-40b8-93e4-5629b1a04fdc',
@@ -32,6 +33,7 @@ export function FileUploader() {
   const [progress, setProgress] = React.useState(0)
   const [message, setMessage] = React.useState('')
   const [filesInfos, setFileInfos] = React.useState([])
+  const { triggerSnackbar } = useSnackBar()
   React.useEffect(() => {
     const creds = {
       accessKeyId: config.ACCESS_KEY_ID,
@@ -97,6 +99,7 @@ export function FileUploader() {
       if (message) {
         setMessage(' ')
       }
+      setProgress(0)
     } else {
       setMessage(
         `File size cannot be greater than ${config.FILE_LIMIT_IN_MB} MB`
@@ -137,7 +140,10 @@ export function FileUploader() {
           },
           ...fi
         ])
+        setIsError(false)
+        setSelectedFiles(null)
         setIsUploading(false)
+        triggerSnackbar('Hurray! Your video was uploaded successfully!')
       })
     } catch (e) {
       setIsError(true)
