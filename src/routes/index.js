@@ -80,8 +80,8 @@ export const appRoutes = [
           <LandingLayout>
             <MySpace />
           </LandingLayout>
-        ),
-        private: true
+        )
+        // private: true
       }
     ]
   },
