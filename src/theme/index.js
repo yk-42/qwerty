@@ -1,5 +1,8 @@
 import { createTheme } from '@mui/material'
 
+/**
+ * Inspired from the inspection of Resourceful Humans Web Page
+ */
 export const palette = {
   type: 'light',
   primary: {

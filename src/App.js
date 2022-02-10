@@ -15,6 +15,9 @@ export default function App() {
       <CssBaseline />
       <AuthProvider>
         <BrowserRouter>
+          {/* IMO, routes should be presented in a separate structural file (json/js) */}
+          {/* afterwards there should be and util component which helps us render them into Route Component */}
+          {/* It helps better read it and maintain it */}
           <Routes>{appRoutes.map(RenderRouteUtil)}</Routes>
         </BrowserRouter>
       </AuthProvider>

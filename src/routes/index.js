@@ -10,6 +10,15 @@ import { Landing } from '../pages/home/Landing'
 import { MySpace } from '../pages/my-space/MySpace'
 import { ErrorPage } from '../pages/security/ErrorPage'
 
+/**
+ * Each route consists of 6 main properties
+ * path: its identifying part of the url
+ * name: for possible display usage
+ * exact: for route to match exactly its path, so that '/xyz' won't be matched for a descendant of '/'
+ * element: the JSX associated element, could alo be component and will have to render it further
+ * nestedRoutes: possible child routes
+ * private: a boolean value to tell whether this route should redirect away non-authorized users or not
+ */
 export const appRoutes = [
   {
     path: '/',

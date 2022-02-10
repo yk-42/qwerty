@@ -4,6 +4,14 @@ import { Route } from 'react-router-dom'
 
 import { RequireAuth } from '../components/security/RequireAuth'
 
+/**
+ * takes a certain route object,
+ * enroll its element inside its required ancestors
+ *  > i.e: RequireAuth if it is a private route
+ * have its children rendered as-well
+ * @param {*} param Object of the `routes/index.js` appRouting
+ * @returns {JSXElement}
+ */
 export const RenderRouteUtil = ({
   name,
   nestedRoutes,

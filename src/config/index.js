@@ -4,5 +4,5 @@ export const config = {
   S3_BUCKET: process.env.REACT_APP_S3_BUCKET,
   S3_BUCKET_FOLDER: process.env.REACT_APP_S3_BUCKET_FOLDER,
   S3_BUCKET_REGION: process.env.REACT_APP_S3_BUCKET_REGION,
-  FILE_LIMIT_IN_MB: 40
+  FILE_LIMIT_IN_MB: 50
 }
